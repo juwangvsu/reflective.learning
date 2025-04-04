@@ -197,6 +197,8 @@ def run_preprocess(args):
 # === Generate ===
 def run_generate(args):
     # Load state weights (JSON, file path, or CSV)
+    print('xxx state_weights ', args.state_weights)
+
     if args.state_weights.endswith(".json"):
         with open(args.state_weights) as f:
             state_weights = json.load(f)
@@ -266,6 +268,7 @@ def run_generate(args):
                     decoded = [id_to_token[tok] for tok in tokens]
                     result = dict(base)
                     result["token"] = decoded
+                    print(f"yyy result for sample# {line_num}, decoded tokent {decoded}")
                     all_outputs.append(result)
             except Exception as e:
                 raise RuntimeError(f"Line {line_num}: Failed to process: {e}") from e
